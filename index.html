@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VISION | Elite Designers Network</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            editorial: ['"Instrument Serif"', 'Georgia', 'serif'],
+            vision: ['"Syne"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      transition: background-color 0.25s ease, color 0.25s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar { display: none; }
+    .custom-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    .subtle-glass {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(229, 231, 235, 0.85);
+    }
+    .dark .subtle-glass {
+      background: rgba(14, 14, 22, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .btn-vision-primary {
+      font-weight: 700;
+      letter-spacing: 0.025em;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-vision-primary:active { transform: scale(0.96); }
+    @keyframes visionPulse {
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+    .loading-logo { animation: visionPulse 1.8s ease-in-out infinite; }
+    @keyframes dotsWave {
+      0%, 20% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .loading-dot { animation: dotsWave 1.4s infinite; }
+    @keyframes heartPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
+    .heart-active {
+      animation: heartPop 0.25s ease-in-out forwards;
+      color: #ef4444 !important;
+      fill: #ef4444 !important;
+    }
+  </style>
+</head>
+<body class="bg-[#F8F8F5] text-zinc-900 dark:bg-[#070709] dark:text-zinc-100 min-h-screen flex flex-col font-sans pb-20 md:pb-0">
+
+  <!-- ==================== VISION APP LOADER ==================== -->
+  <div id="visionAppLoader" class="fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-300 pointer-events-none" style="background: radial-gradient(circle at center, #1b2d4b 0%, #0d192c 60%, #080f1a 100%);">
+    <div class="flex flex-col items-center loading-logo">
+      <h1 class="font-vision text-4xl md:text-6xl font-black text-white tracking-[0.28em] uppercase select-none">VISION</h1>
+      <p class="text-xs md:text-sm font-black text-blue-200/90 tracking-[0.45em] uppercase mt-3 select-none flex items-center">
+        LOADING<span class="loading-dot">.</span><span class="loading-dot" style="animation-delay: 0.2s">.</span><span class="loading-dot" style="animation-delay: 0.4s">.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-[#F8F8F5]/85 dark:bg-[#070709]/85 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800/80 px-4 md:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <div onclick="navigateWithLoading('home')" class="cursor-pointer flex items-center gap-2">
+          <span class="font-black text-2xl tracking-[0.24em] text-zinc-950 dark:text-white uppercase font-vision">VISION</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-6 text-xs font-bold tracking-wide text-zinc-500 dark:text-zinc-400">
+          <button id="nav-top-home" onclick="navigateWithLoading('home')" class="top-nav-link text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 pb-1 transition">Home</button>
+          <button id="nav-top-circle" onclick="navigateWithLoading('circle')" class="top-nav-link hover:text-zinc-900 dark:hover:text-white transition">Community</button>
+          <button id="nav-top-shop" onclick="navigateWithLoading('shop')" class="top-nav-link hover:text-zinc-900 dark:hover:text-white transition">Shop</button>
+          <button id="nav-top-agency" onclick="navigateWithLoading('agency')" class="top-nav-link hover:text-zinc-900 dark:hover:text-white transition">Agency</button>
+          <button onclick="window.open('/panel', '_blank')" class="top-nav-link text-amber-500 hover:text-amber-400 transition">Panel ⚡</button>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleThemeMode()" class="p-2 rounded-xl bg-zinc-200/70 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:scale-105 transition" title="Toggle Theme">
+          <svg id="themeIconSun" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="themeIconMoon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <div id="topUserAction" class="flex items-center gap-2.5">
+          <button onclick="openModal('authModal')" class="btn-vision-primary bg-blue-600 hover:bg-blue-500 text-white text-xs px-5 py-2 rounded-full shadow-md shadow-blue-600/25">
+            Join →
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTAINER ==================== -->
+  <div class="max-w-7xl mx-auto w-full flex-1 px-3 md:px-6 py-4 grid grid-cols-1 md:grid-cols-12 gap-6">
+
+    <!-- DESKTOP LEFT SIDEBAR -->
+    <aside class="hidden md:block md:col-span-3 space-y-4">
+      <div class="sticky top-20 space-y-3">
+        <div class="subtle-glass rounded-2xl p-2 shadow-sm space-y-1 text-xs font-bold tracking-tight">
+          <button onclick="navigateWithLoading('home')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home Portal</span>
+          </button>
+          <button onclick="navigateWithLoading('circle')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Community Circle</span>
+          </button>
+          <button onclick="navigateWithLoading('shop')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>Asset Shop</span>
+          </button>
+          <button onclick="navigateWithLoading('agency')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36z"/></svg>
+            <span>Agency & Studio</span>
+          </button>
+        </div>
+
+        <button onclick="handleNewPostTrigger()" class="btn-vision-primary w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-xs shadow-lg shadow-blue-600/25 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          <span>Publish Post / Media</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- CENTER CONTENT -->
+    <main class="col-span-1 md:col-span-6 space-y-4">
+
+      <!-- ================= VIEW 1: HOME ================= -->
+      <section id="view-home" class="view-panel space-y-4">
+        <div class="subtle-glass rounded-2xl p-4 overflow-x-auto custom-scroll shadow-sm flex items-center gap-6 text-sm font-semibold text-zinc-400">
+          <span class="font-editorial italic text-base text-zinc-500 dark:text-zinc-400">Courses</span>
+          <span class="text-zinc-950 dark:text-white font-bold border-b-2 border-blue-600 pb-0.5">Design</span>
+          <span class="font-editorial italic text-base text-zinc-500 dark:text-zinc-400">Motion</span>
+          <span class="font-editorial italic text-base text-zinc-500 dark:text-zinc-400">3D Visuals</span>
+          <span class="font-editorial italic text-base text-zinc-500 dark:text-zinc-400">Identity</span>
+        </div>
+
+        <div class="subtle-glass rounded-3xl p-6 md:p-8 shadow-sm">
+          <span class="text-[10px] font-black uppercase tracking-[0.25em] text-blue-600 dark:text-blue-400">THE PLATFORM</span>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight mt-1.5 leading-snug">
+            One home, every way to grow
+          </h1>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
+            The complete ecosystem for visual artists to publish their work, sell curated templates, and collaborate with top studios.
+          </p>
+
+          <div class="flex gap-2.5 mt-5">
+            <button onclick="navigateWithLoading('circle')" class="btn-vision-primary bg-blue-600 hover:bg-blue-500 text-white text-xs px-5 py-2.5 rounded-full shadow-md shadow-blue-600/30">
+              Join Circle Feed →
+            </button>
+            <button onclick="navigateWithLoading('shop')" class="btn-vision-primary bg-zinc-200/80 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs px-5 py-2.5 rounded-full">
+              Explore Shop
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div onclick="navigateWithLoading('shop')" class="subtle-glass rounded-3xl p-6 shadow-sm cursor-pointer hover:border-blue-500/40 transition">
+            <div class="flex justify-between items-center mb-1.5">
+              <h2 class="text-xl font-extrabold text-zinc-950 dark:text-white tracking-tight">VISION Shop</h2>
+              <span class="text-xs text-blue-600 dark:text-blue-400 font-bold">Open →</span>
+            </div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              PSD files, Photoshop brushes, After Effects templates, LUTs, fonts and more, with secure local downloads.
+            </p>
+          </div>
+
+          <div onclick="navigateWithLoading('circle')" class="subtle-glass rounded-3xl p-6 shadow-sm cursor-pointer hover:border-blue-500/40 transition">
+            <div class="flex justify-between items-center mb-1.5">
+              <h2 class="text-xl font-extrabold text-zinc-950 dark:text-white tracking-tight">VISION Circle</h2>
+              <span class="text-xs text-blue-600 dark:text-blue-400 font-bold">Open Feed →</span>
+            </div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              The community for creators to share motion pieces, feedback, and post real-time design updates.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 2: CIRCLE ================= -->
+      <section id="view-circle" class="view-panel hidden space-y-4">
+        <div class="subtle-glass rounded-3xl p-6 shadow-sm">
+          <p class="text-[11px] uppercase tracking-wider text-blue-600 dark:text-blue-400 font-extrabold">VISION CIRCLE</p>
+          <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mt-1">
+            Share what you make. <span class="font-editorial text-3xl font-normal text-zinc-500 italic">See what others see.</span>
+          </h1>
+
+          <!-- Stories Strip -->
+          <div class="mt-6 pt-4 border-t border-zinc-200/60 dark:border-zinc-800 flex items-center gap-4 overflow-x-auto custom-scroll">
+            <div onclick="handleNewStoryTrigger()" class="flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer group">
+              <div class="w-14 h-14 rounded-full p-[2px] border-2 border-dashed border-blue-500 flex items-center justify-center group-hover:scale-105 transition">
+                <div class="w-full h-full rounded-full bg-blue-50 dark:bg-zinc-800 flex items-center justify-center text-blue-600 dark:text-white font-bold text-xl">+</div>
+              </div>
+              <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400">Your Story</span>
+            </div>
+            <div id="storiesContainer" class="flex items-center gap-4"></div>
+          </div>
+        </div>
+
+        <div id="feedPostsStream" class="space-y-4"></div>
+      </section>
+
+      <!-- ================= VIEW 3: SHOP ================= -->
+      <section id="view-shop" class="view-panel hidden space-y-4">
+        <div class="subtle-glass rounded-3xl p-6 shadow-sm">
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-600 dark:text-blue-400">Curated Store</span>
+          <h2 class="text-2xl font-bold text-zinc-900 dark:text-white mt-1">Digital Design Assets & Presets</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="subtle-glass rounded-3xl p-4 shadow-sm space-y-3">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600" class="w-full h-36 object-cover rounded-2xl">
+            <div class="flex justify-between items-center">
+              <span class="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-bold px-2 py-0.5 rounded-full">LUTs Pack</span>
+              <span class="text-xs font-black text-zinc-900 dark:text-white">Free</span>
+            </div>
+            <h3 class="text-xs font-bold truncate">Film Tone 35mm Emulation</h3>
+            <button onclick="alert('Asset downloaded.')" class="btn-vision-primary w-full py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl text-xs">Download Asset</button>
+          </div>
+          <div class="subtle-glass rounded-3xl p-4 shadow-sm space-y-3">
+            <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=600" class="w-full h-36 object-cover rounded-2xl">
+            <div class="flex justify-between items-center">
+              <span class="text-[10px] bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 font-bold px-2 py-0.5 rounded-full">After Effects</span>
+              <span class="text-xs font-black text-zinc-900 dark:text-white">$14.00</span>
+            </div>
+            <h3 class="text-xs font-bold truncate">Kinetic Title Templates v3</h3>
+            <button onclick="alert('Order initiated.')" class="btn-vision-primary w-full py-2.5 bg-blue-600 text-white rounded-xl text-xs">Purchase License</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 4: AGENCY ================= -->
+      <section id="view-agency" class="view-panel hidden space-y-4">
+        <div class="subtle-glass rounded-3xl p-6 shadow-sm text-center">
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-blue-600 dark:text-blue-400">VISION Studio</span>
+          <h2 class="text-2xl font-bold text-zinc-900 dark:text-white mt-1">We Craft High-Impact Visuals</h2>
+          <p class="text-xs text-zinc-500 mt-2 max-w-sm mx-auto leading-relaxed">Top-tier brand identities, 3D motion pieces, and interactive web design for forward-thinking creative companies.</p>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 5: PROFILE ================= -->
+      <section id="view-profile" class="view-panel hidden space-y-4">
+        <div class="subtle-glass rounded-3xl overflow-hidden shadow-sm">
+          <div class="h-44 md:h-56 bg-zinc-800 relative group overflow-hidden">
+            <img id="profBannerImg" src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200" class="w-full h-full object-cover">
+          </div>
+
+          <div class="px-6 pb-6 relative">
+            <div class="flex justify-between items-end -mt-14 mb-4">
+              <img id="profAvatar" src="" class="w-24 h-24 rounded-full border-4 border-white dark:border-zinc-900 object-cover shadow-xl bg-zinc-800">
+              <div class="flex gap-2">
+                <button id="profMainActionBtn" onclick="openEditProfileModal()" class="btn-vision-primary bg-blue-600 hover:bg-blue-500 text-white text-xs px-5 py-2.5 rounded-full shadow-md shadow-blue-600/30">Edit Profile</button>
+                <button onclick="handleLogout()" class="btn-vision-primary bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs px-4 py-2.5 rounded-full">Logout</button>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              <h2 id="profName" class="text-xl font-extrabold text-zinc-900 dark:text-white">User</h2>
+              <span id="profBadge" class="hidden text-[#1D9BF0]">
+                <svg class="w-4 h-4 fill-current inline-block" viewBox="0 0 22 22"><g><path d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.136 2.136 5.688-5.748 1.302 1.293-6.99 7.049z"></path></g></svg>
+              </span>
+            </div>
+            <p id="profHandle" class="text-xs text-zinc-500">@username</p>
+            <p id="profHeadline" class="text-xs text-zinc-700 dark:text-zinc-300 font-medium mt-1">Graphic designer</p>
+            <p id="profBio" class="text-xs text-zinc-600 dark:text-zinc-400 mt-2">No bio written yet.</p>
+          </div>
+        </div>
+
+        <div id="profPostsStream" class="space-y-4"></div>
+      </section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="hidden md:block md:col-span-3 space-y-4">
+      <div class="sticky top-20 space-y-4">
+        <div class="relative">
+          <input id="desktopSearch" oninput="filterPostsSearch(this.value)" type="text" placeholder="Search posts or #tags" class="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl pl-10 pr-4 py-2.5 text-xs text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-blue-500 shadow-sm">
+          <svg class="w-4 h-4 text-zinc-400 absolute left-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+
+        <div class="subtle-glass rounded-3xl p-5 shadow-sm space-y-3">
+          <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Trending Hashtags</h3>
+          <div id="dynamicHashtagsContainer" class="space-y-2.5 text-xs">
+            <div class="text-xs text-zinc-400">No hashtags used yet.</div>
+          </div>
+        </div>
+
+        <div class="subtle-glass rounded-3xl p-5 shadow-sm space-y-3.5">
+          <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Admin Command</h3>
+          <p class="text-xs text-zinc-500">Manage user approvals, verification checkmarks, and posts.</p>
+          <a href="/panel" class="btn-vision-primary block w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-black text-center rounded-xl text-xs font-bold">Open /panel</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ==================== MOBILE & TABLET BOTTOM FLOATING BAR ==================== -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#F8F8F5]/90 dark:bg-[#070709]/90 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800/80 px-4 py-2 flex items-center justify-around shadow-2xl">
+    <button onclick="navigateWithLoading('home')" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span class="text-[10px] font-bold">Home</span>
+    </button>
+    <button onclick="navigateWithLoading('circle')" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span class="text-[10px] font-bold">Circle</span>
+    </button>
+    <button onclick="handleNewPostTrigger()" class="bg-[#0B132B] dark:bg-white text-white dark:text-black w-12 h-10 rounded-2xl flex items-center justify-center shadow-lg active:scale-90 transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+    <button onclick="navigateWithLoading('shop')" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+      <span class="text-[10px] font-bold">Work</span>
+    </button>
+    <button onclick="handleMobileAuthProfileClick()" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+      <span id="mobileNavAuthLabel" class="text-[10px] font-bold">Sign in</span>
+    </button>
+  </nav>
+
+  <!-- ==================== MODALS ==================== -->
+  <!-- 1. Post Modal (Upload Videos, Images, Files) -->
+  <div id="postModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl w-full max-w-sm">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-sm font-bold uppercase tracking-wider">New Publication</h2>
+        <button onclick="closeModal('postModal')" class="text-zinc-500 hover:text-white">✕</button>
+      </div>
+      <textarea id="newCaption" placeholder="Write description with #hashtags..." class="w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs h-24 resize-none mb-3 focus:outline-none"></textarea>
+      
+      <div class="mb-4">
+        <label class="block text-[11px] font-bold mb-1 text-zinc-400">Select Media (Video, Image, or File):</label>
+        <input id="postFileInput" type="file" accept="image/*,video/*,.pdf,.zip" class="text-xs text-zinc-400 w-full file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500">
+      </div>
+      
+      <button id="postPublishBtn" onclick="submitNewPost()" class="btn-vision-primary w-full bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-xl text-xs">Publish to Feed</button>
+    </div>
+  </div>
+
+  <!-- 2. Edit Profile Modal (Avatar Upload & Info) -->
+  <div id="editProfileModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto custom-scroll shadow-2xl">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-base font-bold uppercase tracking-wider">Edit Profile & Avatar</h2>
+        <button onclick="closeModal('editProfileModal')" class="text-zinc-500 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <div class="space-y-4 mb-4">
+        <div>
+          <label class="block text-[10px] text-zinc-400 uppercase font-bold mb-1">New Profile Avatar Photo</label>
+          <input id="editAvatarInput" type="file" accept="image/*" class="text-xs text-zinc-400 w-full file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-zinc-800 file:text-white">
+        </div>
+      </div>
+
+      <div class="space-y-3 text-xs font-semibold">
+        <div>
+          <label class="block text-[10px] text-zinc-400 uppercase font-bold mb-1">Full Name</label>
+          <input id="editProfName" type="text" class="w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2.5 font-normal">
+        </div>
+        <div>
+          <label class="block text-[10px] text-zinc-400 uppercase font-bold mb-1">Headline / Field</label>
+          <input id="editProfHeadline" type="text" class="w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2.5 font-normal">
+        </div>
+        <div>
+          <label class="block text-[10px] text-zinc-400 uppercase font-bold mb-1">Bio</label>
+          <textarea id="editProfBio" class="w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2.5 h-16 resize-none font-normal"></textarea>
+        </div>
+        <div>
+          <label class="block text-[10px] text-zinc-400 uppercase font-bold mb-1">Telegram Link</label>
+          <input id="editProfTelegram" type="text" class="w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2.5 font-normal">
+        </div>
+      </div>
+
+      <button id="saveProfBtn" onclick="saveUserProfile()" class="btn-vision-primary w-full mt-5 bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl text-xs">Save & Upload Avatar</button>
+    </div>
+  </div>
+
+  <!-- 3. Story Upload Modal -->
+  <div id="storyModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl w-full max-w-sm">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-sm font-bold uppercase tracking-wider">Upload New Story</h2>
+        <button onclick="closeModal('storyModal')" class="text-zinc-500">✕</button>
+      </div>
+      <input id="storyFileInput" type="file" accept="image/*,video/*" class="text-xs mb-4 text-zinc-400 w-full file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white">
+      <button id="storyPublishBtn" onclick="submitNewStory()" class="btn-vision-primary w-full bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-xl text-xs">Share Story</button>
+    </div>
+  </div>
+
+  <!-- 4. Fullscreen Lightbox & Download -->
+  <div id="mediaLightboxModal" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4">
+    <div class="flex justify-between items-center text-white px-4 py-2">
+      <span id="lightboxCaption" class="text-xs font-semibold truncate max-w-md"></span>
+      <div class="flex items-center gap-3">
+        <a id="lightboxDownloadBtn" href="#" download target="_blank" class="btn-vision-primary flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs px-4 py-2 rounded-xl">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          <span>Download</span>
+        </a>
+        <button onclick="closeModal('mediaLightboxModal')" class="p-2 text-zinc-400 hover:text-white text-xl">✕</button>
+      </div>
+    </div>
+    <div class="flex-1 flex items-center justify-center p-2">
+      <img id="lightboxImg" src="" class="max-h-[82vh] max-w-full object-contain rounded-xl shadow-2xl">
+      <video id="lightboxVideo" src="" controls class="hidden max-h-[82vh] max-w-full rounded-xl shadow-2xl"></video>
+    </div>
+  </div>
+
+  <!-- 5. Auth Modal -->
+  <div id="authModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl w-full max-w-sm">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-base font-bold uppercase tracking-wider">Creator Access</h2>
+        <button onclick="closeModal('authModal')" class="text-zinc-500">✕</button>
+      </div>
+      <input id="authEmail" type="email" placeholder="Email address" class="w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs mb-3 text-zinc-900 dark:text-white focus:outline-none">
+      <input id="authPass" type="password" placeholder="Password" class="w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs mb-4 text-zinc-900 dark:text-white focus:outline-none">
+      <div class="flex gap-2">
+        <button onclick="executeAuth(false)" class="btn-vision-primary flex-1 bg-zinc-200 dark:bg-zinc-800 py-2.5 rounded-xl text-xs">Sign In</button>
+        <button onclick="executeAuth(true)" class="btn-vision-primary flex-1 bg-blue-600 text-white py-2.5 rounded-xl text-xs">Request Account</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LOGIC JAVASCRIPT ==================== -->
+  <script>
+    let currentUser = null;
+    let livePosts = [];
+    let liveStories = [];
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      initTheme();
+      initSession();
+      await fetchLivePosts();
+      await fetchLiveStories();
+      navigateWithLoading('home', true);
+    });
+
+    function initTheme() {
+      const saved = localStorage.getItem('vision_theme') || 'dark';
+      if (saved === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    }
+
+    function toggleThemeMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('vision_theme', isDark ? 'dark' : 'light');
+    }
+
+    function navigateWithLoading(viewName, isInitial = false) {
+      const loader = document.getElementById('visionAppLoader');
+      if (loader) {
+        loader.classList.remove('opacity-0', 'pointer-events-none');
+        loader.classList.add('opacity-100');
+      }
+      setTimeout(() => {
+        switchView(viewName);
+        if (loader) {
+          loader.classList.remove('opacity-100');
+          loader.classList.add('opacity-0', 'pointer-events-none');
+        }
+      }, isInitial ? 400 : 250);
+    }
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+      const target = document.getElementById('view-' + viewName);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.top-nav-link').forEach(btn => {
+        btn.className = 'top-nav-link hover:text-zinc-900 dark:hover:text-white transition';
+      });
+      const topActive = document.getElementById('nav-top-' + viewName);
+      if (topActive) {
+        topActive.className = 'top-nav-link text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 pb-1 transition';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) { el.classList.remove('hidden'); el.classList.add('flex'); }
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) { el.classList.add('hidden'); el.classList.remove('flex'); }
+    }
+
+    function initSession() {
+      const saved = localStorage.getItem('vision_user');
+      if (saved) {
+        currentUser = JSON.parse(saved);
+        updateUserUI();
+      }
+    }
+
+    function updateUserUI() {
+      if (!currentUser) return;
+      document.getElementById('topUserAction').innerHTML = `
+        <div onclick="openUserProfile()" class="btn-vision-primary cursor-pointer flex items-center gap-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-3.5 py-1.5 rounded-full shadow-sm">
+          <img src="${currentUser.avatarUrl}" class="w-6 h-6 rounded-full object-cover">
+          <span class="text-xs font-bold">@${currentUser.username}</span>
+          ${currentUser.isVerified ? '<span class="text-[#1D9BF0] font-bold text-xs">✓</span>' : ''}
+        </div>
+      `;
+      const mobileLabel = document.getElementById('mobileNavAuthLabel');
+      if (mobileLabel) mobileLabel.innerText = '@' + currentUser.username;
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('vision_user');
+      currentUser = null;
+      location.reload();
+    }
+
+    async function executeAuth(isSignUp) {
+      const email = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPass').value.trim();
+      if (!email || !password) return alert('Enter email and password');
+
+      const endpoint = isSignUp ? '/api/auth/register' : '/api/auth/login';
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Authentication error');
+
+        if (isSignUp) {
+          alert(data.message || 'Request submitted! Await administrator approval in /panel.');
+          closeModal('authModal');
+        } else {
+          currentUser = data.user;
+          localStorage.setItem('vision_user', JSON.stringify(currentUser));
+          updateUserUI();
+          closeModal('authModal');
+          alert('Welcome back @' + currentUser.username);
+          navigateWithLoading('circle');
+        }
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    function handleMobileAuthProfileClick() {
+      if (currentUser) openUserProfile();
+      else openModal('authModal');
+    }
+
+    function openUserProfile() {
+      if (!currentUser) return openModal('authModal');
+      document.getElementById('profName').innerText = currentUser.fullName || currentUser.username;
+      document.getElementById('profHandle').innerText = '@' + currentUser.username;
+      document.getElementById('profHeadline').innerText = currentUser.headline || 'Visual Artist';
+      document.getElementById('profBio').innerText = currentUser.bio || 'Digital creator on VISION.';
+      document.getElementById('profAvatar').src = currentUser.avatarUrl;
+
+      const badge = document.getElementById('profBadge');
+      if (currentUser.isVerified) badge.classList.remove('hidden');
+      else badge.classList.add('hidden');
+
+      const myPosts = livePosts.filter(p => p.userId === currentUser.id);
+      document.getElementById('profPostsStream').innerHTML = myPosts.length
+        ? myPosts.map(renderSinglePostHTML).join('')
+        : '<div class="subtle-glass p-8 text-center text-xs text-zinc-500 rounded-3xl">No posts published yet.</div>';
+
+      navigateWithLoading('profile');
+    }
+
+    function openEditProfileModal() {
+      if (!currentUser) return openModal('authModal');
+      document.getElementById('editProfName').value = currentUser.fullName || '';
+      document.getElementById('editProfHeadline').value = currentUser.headline || '';
+      document.getElementById('editProfBio').value = currentUser.bio || '';
+      document.getElementById('editProfTelegram').value = currentUser.telegramUrl || '';
+      openModal('editProfileModal');
+    }
+
+    async function saveUserProfile() {
+      if (!currentUser) return;
+      const btn = document.getElementById('saveProfBtn');
+      btn.innerText = 'Uploading Avatar & Saving...';
+      btn.disabled = true;
+
+      try {
+        const formData = new FormData();
+        formData.append('userId', currentUser.id);
+        formData.append('fullName', document.getElementById('editProfName').value.trim());
+        formData.append('headline', document.getElementById('editProfHeadline').value.trim());
+        formData.append('bio', document.getElementById('editProfBio').value.trim());
+        formData.append('telegramUrl', document.getElementById('editProfTelegram').value.trim());
+
+        const avatarFile = document.getElementById('editAvatarInput').files[0];
+        if (avatarFile) formData.append('avatar', avatarFile);
+
+        const res = await fetch('/api/profile/update', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Update failed');
+
+        currentUser = data.user;
+        localStorage.setItem('vision_user', JSON.stringify(currentUser));
+        updateUserUI();
+        closeModal('editProfileModal');
+        openUserProfile();
+        await fetchLivePosts();
+        alert('Profile and avatar updated successfully!');
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.innerText = 'Save & Upload Avatar';
+        btn.disabled = false;
+      }
+    }
+
+    async function fetchLivePosts() {
+      try {
+        const res = await fetch('/api/posts');
+        livePosts = await res.json();
+        renderFeed(livePosts);
+        updateDynamicHashtags(livePosts);
+      } catch (e) {
+        console.error('Error fetching posts:', e);
+      }
+    }
+
+    function renderFeed(posts) {
+      const container = document.getElementById('feedPostsStream');
+      if (!posts || !posts.length) {
+        container.innerHTML = '<div class="subtle-glass p-12 text-center text-xs text-zinc-500 rounded-3xl">No posts published yet. Be the first!</div>';
+        return;
+      }
+      container.innerHTML = posts.map(renderSinglePostHTML).join('');
+    }
+
+    function renderSinglePostHTML(p) {
+      const isLiked = currentUser && p.likes && p.likes.includes(currentUser.id);
+      const likesCount = (p.likes && p.likes.length) || 0;
+
+      return `
+        <article class="subtle-glass rounded-3xl p-5 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="${p.avatarUrl}" class="w-10 h-10 rounded-full object-cover">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-bold text-zinc-900 dark:text-white">${p.fullName || p.username}</span>
+                  ${p.isVerified ? '<span class="text-[#1D9BF0] font-bold text-xs">✓</span>' : ''}
+                  <span class="text-zinc-400 text-[11px]">@${p.username}</span>
+                </div>
+                <span class="text-[10px] text-zinc-400 font-semibold">${new Date(p.createdAt).toLocaleDateString()}</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs text-zinc-700 dark:text-zinc-200 leading-relaxed">${p.caption || ''}</p>
+
+          ${p.mediaUrl ? `
+            <div onclick="openLightbox('${p.mediaUrl}', '${p.mediaType}', '${encodeURIComponent(p.caption || '')}')" class="rounded-2xl overflow-hidden cursor-pointer max-h-[460px] bg-zinc-100 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800">
+              ${p.mediaType === 'video'
+                ? `<video src="${p.mediaUrl}" controls class="w-full max-h-[460px] object-cover"></video>`
+                : `<img src="${p.mediaUrl}" class="w-full max-h-[460px] object-cover hover:scale-[1.01] transition duration-300">`
+              }
+            </div>
+          ` : ''}
+
+          <div class="flex items-center justify-between pt-2 border-t border-zinc-200/60 dark:border-zinc-800 text-zinc-500 text-xs">
+            <button onclick="toggleLike('${p.id}')" class="btn-vision-primary flex items-center gap-1.5 hover:text-rose-500 transition">
+              <svg class="w-4 h-4 ${isLiked ? 'heart-active' : ''}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <span class="text-[11px] font-bold">${likesCount}</span>
+            </button>
+            ${p.mediaUrl ? `
+              <a href="${p.mediaUrl}" download target="_blank" class="hover:text-blue-500 flex items-center gap-1 transition text-[11px] font-semibold">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                <span>Download Media</span>
+              </a>
+            ` : ''}
+          </div>
+        </article>
+      `;
+    }
+
+    async function toggleLike(postId) {
+      if (!currentUser) return openModal('authModal');
+      try {
+        const res = await fetch(`/api/posts/${postId}/like`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: currentUser.id })
+        });
+        if (res.ok) await fetchLivePosts();
+      } catch (e) {}
+    }
+
+    function handleNewPostTrigger() {
+      if (!currentUser) return openModal('authModal');
+      openModal('postModal');
+    }
+
+    async function submitNewPost() {
+      if (!currentUser) return openModal('authModal');
+      const caption = document.getElementById('newCaption').value.trim();
+      const fileInput = document.getElementById('postFileInput');
+      const file = fileInput.files[0];
+
+      if (!caption && !file) return alert('Enter a caption or select a file to upload.');
+
+      const btn = document.getElementById('postPublishBtn');
+      btn.innerText = 'Uploading Local Media...';
+      btn.disabled = true;
+
+      try {
+        const formData = new FormData();
+        formData.append('userId', currentUser.id);
+        formData.append('caption', caption);
+        if (file) formData.append('file', file);
+
+        const res = await fetch('/api/posts', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to upload post');
+
+        closeModal('postModal');
+        document.getElementById('newCaption').value = '';
+        fileInput.value = '';
+        await fetchLivePosts();
+        navigateWithLoading('circle');
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.innerText = 'Publish to Feed';
+        btn.disabled = false;
+      }
+    }
+
+    // Stories Flow
+    async function fetchLiveStories() {
+      try {
+        const res = await fetch('/api/stories');
+        liveStories = await res.json();
+        const cont = document.getElementById('storiesContainer');
+        cont.innerHTML = liveStories.map(s => `
+          <div onclick="openLightbox('${s.mediaUrl}', 'image', '@${s.username} Story')" class="flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer group">
+            <div class="w-14 h-14 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-indigo-500 group-hover:scale-105 transition">
+              <img src="${s.avatarUrl}" class="w-full h-full rounded-full object-cover border-2 border-white dark:border-black">
+            </div>
+            <span class="text-[10px] font-bold truncate max-w-[60px] text-zinc-700 dark:text-zinc-300">@${s.username}</span>
+          </div>
+        `).join('');
+      } catch (e) {}
+    }
+
+    function handleNewStoryTrigger() {
+      if (!currentUser) return openModal('authModal');
+      openModal('storyModal');
+    }
+
+    async function submitNewStory() {
+      if (!currentUser) return;
+      const file = document.getElementById('storyFileInput').files[0];
+      if (!file) return alert('Select an image or video');
+
+      const btn = document.getElementById('storyPublishBtn');
+      btn.innerText = 'Uploading...';
+      btn.disabled = true;
+
+      try {
+        const formData = new FormData();
+        formData.append('userId', currentUser.id);
+        formData.append('file', file);
+
+        const res = await fetch('/api/stories', {
+          method: 'POST',
+          body: formData
+        });
+        if (!res.ok) throw new Error('Upload failed');
+        closeModal('storyModal');
+        document.getElementById('storyFileInput').value = '';
+        await fetchLiveStories();
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.innerText = 'Share Story';
+        btn.disabled = false;
+      }
+    }
+
+    function openLightbox(url, type, caption) {
+      document.getElementById('lightboxCaption').innerText = decodeURIComponent(caption);
+      const dlBtn = document.getElementById('lightboxDownloadBtn');
+      dlBtn.href = url;
+
+      const img = document.getElementById('lightboxImg');
+      const vid = document.getElementById('lightboxVideo');
+
+      if (type === 'video' || url.endsWith('.mp4') || url.endsWith('.webm')) {
+        img.classList.add('hidden');
+        vid.classList.remove('hidden');
+        vid.src = url;
+      } else {
+        vid.classList.add('hidden');
+        img.classList.remove('hidden');
+        img.src = url;
+      }
+      openModal('mediaLightboxModal');
+    }
+
+    function updateDynamicHashtags(posts) {
+      const counts = {};
+      posts.forEach(p => {
+        if (!p.caption) return;
+        const found = p.caption.match(/#[a-zA-Z0-9_؀-ۿ]+/g);
+        if (found) {
+          found.forEach(tag => {
+            const clean = tag.toLowerCase();
+            counts[clean] = (counts[clean] || 0) + 1;
+          });
+        }
+      });
+      const container = document.getElementById('dynamicHashtagsContainer');
+      const sortedTags = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      if (sortedTags.length === 0) {
+        container.innerHTML = '<div class="text-xs text-zinc-400">No hashtags in posts yet.</div>';
+        return;
+      }
+      container.innerHTML = sortedTags.map(([tag, count]) => `
+        <div onclick="filterPostsSearch('${tag}')" class="flex justify-between items-center cursor-pointer hover:text-blue-500 transition font-bold">
+          <span class="text-zinc-800 dark:text-zinc-200">${tag}</span>
+          <span class="text-zinc-400 text-[11px]">${count}</span>
+        </div>
+      `).join('');
+    }
+
+    function filterPostsSearch(query) {
+      const q = query.toLowerCase();
+      renderFeed(livePosts.filter(p => (p.caption || '').toLowerCase().includes(q)));
+    }
+  </script>
+</body>
+</html>
